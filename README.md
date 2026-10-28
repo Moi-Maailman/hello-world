@@ -6,8 +6,8 @@ This project is developed by team **Hello World**.
 
 ## Team members
 
-- Mai Vu
-- Mai Phuong Luu
+- Mai Vu ([phuongmai19067-web](https://github.com/phuongmai19067-web))
+- Mai Phuong Luu ([@phuongmaix2](https://github.com/phuongmaix2))
 
 ## Backlog
 
