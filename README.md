@@ -6,7 +6,8 @@ This project is developed by team **Hello World**.
 
 ## Team members
 
-- Phuong Mai
+- Mai Vu
+- Mai Phuong Luu
 
 ## Backlog
 
