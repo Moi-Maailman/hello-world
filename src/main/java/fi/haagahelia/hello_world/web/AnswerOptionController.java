@@ -1,4 +1,4 @@
-package fi.haagahelia.hello_world.controller;
+package fi.haagahelia.hello_world.web;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
