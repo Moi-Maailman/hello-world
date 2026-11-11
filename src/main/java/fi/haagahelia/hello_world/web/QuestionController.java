@@ -10,6 +10,8 @@ import fi.haagahelia.hello_world.domain.Question;
 import fi.haagahelia.hello_world.domain.QuestionRepository;
 import fi.haagahelia.hello_world.domain.Quiz;
 import fi.haagahelia.hello_world.domain.QuizRepository;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
 public class QuestionController {
@@ -30,5 +32,14 @@ public class QuestionController {
         model.addAttribute("question", new Question());
         model.addAttribute("difficulties", Difficulty.values());
         return "addquestion";
+    }
+
+    // U5.5: save the question to the quiz
+    @PostMapping("/savequestion/{quizId}")
+    public String saveQuestion(@PathVariable Long quizId, @ModelAttribute Question question) {
+        Quiz quiz = quizRepository.findById(quizId).orElseThrow();
+        question.setQuiz(quiz);
+        questionRepository.save(question);
+        return "redirect:/quizlist";
     }
 }
