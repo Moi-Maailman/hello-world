@@ -18,21 +18,10 @@ public class HelloWorldApplication {
 	@Bean
 	public CommandLineRunner demo(QuizRepository quizRepository) {
 		return (args) -> {
-
-			Quiz quiz1 = new Quiz(
-					"Java Basics",
-					"Test your basic Java knowledge",
-					"SOF001",
-					true);
-
-			Quiz quiz2 = new Quiz(
-					"Database Basics",
-					"Test your database knowledge",
-					"SOF002",
-					false);
-
-			quizRepository.save(quiz1);
-			quizRepository.save(quiz2);
+			if (quizRepository.count() == 0) {
+				quizRepository.save(new Quiz("Java Basics", "Test your basic Java knowledge", "SOF001", true));
+				quizRepository.save(new Quiz("Database Basics", "Test your database knowledge", "SOF002", false));
+			}
 		};
 	}
 
