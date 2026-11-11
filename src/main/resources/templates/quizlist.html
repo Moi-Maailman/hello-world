@@ -28,6 +28,9 @@
             <td>
                 <a th:href="@{/editquiz/{id}(id=${quiz.id})}">Edit</a>
                 <a th:href="@{/addquestion/{id}(id=${quiz.id})}">Add question</a>
+                <form th:action="@{/deletequiz/{id}(id=${quiz.id})}" method="post" style="display:inline">
+                    <button type="submit">Delete</button>
+                </form>
             </td>
         </tr>
     </table>

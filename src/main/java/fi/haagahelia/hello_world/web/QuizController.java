@@ -65,4 +65,10 @@ public class QuizController {
         model.addAttribute("quiz", quiz);
         return "editquiz";
     }
+
+    @PostMapping("/deletequiz/{id}")
+    public String deleteQuiz(@PathVariable Long id) {
+        quizRepository.deleteById(id);
+        return "redirect:/quizlist";
+    }
 }
