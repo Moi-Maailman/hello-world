@@ -27,6 +27,7 @@
             <td th:text="${quiz.createdAt}"></td>
             <td>
                 <a th:href="@{/editquiz/{id}(id=${quiz.id})}">Edit</a>
+                <a th:href="@{/addquestion/{id}(id=${quiz.id})}">Add question</a>
             </td>
         </tr>
     </table>
