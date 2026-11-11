@@ -42,4 +42,11 @@ public class QuestionController {
         questionRepository.save(question);
         return "redirect:/quizlist";
     }
+
+    // U7.1: delete a question
+    @PostMapping("/deletequestion/{id}")
+    public String deleteQuestion(@PathVariable Long id) {
+        questionRepository.deleteById(id);
+        return "redirect:/quizlist";
+    }
 }
