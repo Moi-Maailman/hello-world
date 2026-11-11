@@ -43,14 +43,15 @@ public class QuizController {
         return "quizlist";
     }
 
-    // U3.4: update a quiz
-    @PostMapping("/updatequiz/{id}")
-    public String updateQuiz(@PathVariable Long id, @ModelAttribute Quiz formQuiz) {
-        Quiz quiz = quizRepository.findById(id).orElseThrow();
+    @PostMapping("/updatequiz")
+    public String updateQuiz(@ModelAttribute Quiz formQuiz) {
+        Quiz quiz = quizRepository.findById(formQuiz.getId()).orElseThrow();
+
         quiz.setName(formQuiz.getName());
         quiz.setDescription(formQuiz.getDescription());
         quiz.setCourseCode(formQuiz.getCourseCode());
         quiz.setPublished(formQuiz.isPublished());
+
         quizRepository.save(quiz);
         return "redirect:/quizlist";
     }
