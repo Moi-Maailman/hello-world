@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Quiz List</title>
+</head>
+
+<body>
+    <h1>Quiz List</h1>
+
+    <table>
+        <tr>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Course Code</th>
+            <th>Published</th>
+            <th>Created At</th>
+        </tr>
+
+        <tr th:each="quiz : ${quizzes}">
+            <td th:text="${quiz.name}"></td>
+            <td th:text="${quiz.description}"></td>
+            <td th:text="${quiz.courseCode}"></td>
+            <td th:text="${quiz.published}"></td>
+            <td th:text="${quiz.createdAt}"></td>
+        </tr>
+    </table>
+</body>
+
+</html>

@@ -31,4 +31,10 @@ public class QuizController {
         quizRepository.save(quiz);
         return "redirect:/quizlist";
     }
+
+    @GetMapping("/quizlist")
+    public String showQuizList(Model model) {
+        model.addAttribute("quizzes", quizRepository.findAll());
+        return "quizlist";
+    }
 }
