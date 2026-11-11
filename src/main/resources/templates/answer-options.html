@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Answer options</title>
+</head>
+<body>
+    <h1>Answer options</h1>
+    <p th:text="${question.text}"></p>
+
+    <a th:href="@{/questions/{id}/answer-options/new(id=${question.id})}">Add an answer option</a>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Answer option</th>
+                <th>Correct</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="option : ${answerOptions}">
+                <td th:text="${option.text}"></td>
+                <td th:text="${option.correct} ? 'Yes' : 'No'"></td>
+                <td>
+                    <form th:action="@{/answer-options/{id}/delete(id=${option.id})}" method="post">
+                        <button type="submit">Delete</button>
+                    </form>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a th:href="@{/quizlist}">Back to quizzes</a>
+</body>
+</html>
