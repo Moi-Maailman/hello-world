@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Add Question</title>
+</head>
+
+<body>
+    <h1>Add a question</h1>
+    <p>Quiz: <span th:text="${quiz.name}"></span></p>
+
+    <form th:action="@{/savequestion/{id}(id=${quiz.id})}" th:object="${question}" method="post">
+
+        <label>Question text:</label>
+        <input type="text" th:field="*{text}" required />
+        <br>
+
+        <label>Difficulty:</label>
+        <select th:field="*{difficulty}">
+            <option th:each="d : ${difficulties}" th:value="${d}" th:text="${d}"></option>
+        </select>
+        <br>
+
+        <button type="submit">Add</button>
+        <a th:href="@{/quizlist}">Cancel</a>
+    </form>
+</body>
+
+</html>
