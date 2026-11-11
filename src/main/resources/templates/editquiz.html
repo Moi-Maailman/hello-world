@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Edit Quiz</title>
+</head>
+
+<body>
+    <h1>Edit Quiz</h1>
+
+    <form th:action="@{/updatequiz}" th:object="${quiz}" method="post">
+
+        <input type="hidden" th:field="*{id}" />
+
+        <label>Name:</label>
+        <input type="text" th:field="*{name}" required />
+        <br>
+
+        <label>Description:</label>
+        <input type="text" th:field="*{description}" />
+        <br>
+
+        <label>Course Code:</label>
+        <input type="text" th:field="*{courseCode}" />
+        <br>
+
+        <label>Published:</label>
+        <input type="checkbox" th:field="*{published}" />
+        <br>
+
+        <button type="submit">Save Changes</button>
+    </form>
+
+    <a th:href="@{/quizlist}">Back to Quiz List</a>
+</body>
+
+</html>
