@@ -1,6 +1,11 @@
 package fi.haagahelia.hello_world.domain;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
+
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.OneToMany;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -19,6 +24,8 @@ public class Quiz {
     private String courseCode;
     private boolean published;
     private LocalDateTime createdAt;
+    @OneToMany(mappedBy = "quiz", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Question> questions = new ArrayList<>();
 
     public Quiz() {
     }
@@ -79,6 +86,14 @@ public class Quiz {
 
     public LocalDateTime getCreatedAt() {
         return createdAt;
+    }
+
+    public List<Question> getQuestions() {
+        return questions;
+    }
+
+    public void setQuestions(List<Question> questions) {
+        this.questions = questions;
     }
 
 }
