@@ -18,7 +18,7 @@ public class Quiz {
     private String description;
     private String courseCode;
     private boolean published;
-    private LocalDateTime createdAt;
+    private LocalDateTime createdAt = LocalDateTime.now();
 
     public Quiz() {
     }
