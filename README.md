@@ -14,3 +14,6 @@ This project is developed by team **Hello World**.
 ## Backlog
 
 [Quizzer backlog](https://github.com/orgs/Moi-Maailman/projects/2)
+
+## Deployment
+The application is deployed to Rahti: https://hello-world-quizzer-hello-world.2.rahtiapp.fi
