@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Questions</title>
+</head>
+
+<body>
+    <h1>Questions of "<span th:text="${quiz.name}"></span>"</h1>
+
+    <a th:href="@{/addquestion/{id}(id=${quiz.id})}">Add question</a>
+    <a th:href="@{/quizlist}">Back to quizzes</a>
+
+    <table>
+        <tr>
+            <th>Question</th>
+            <th>Difficulty</th>
+        </tr>
+
+        <tr th:each="question : ${questions}">
+            <td th:text="${question.text}"></td>
+            <td th:text="${question.difficulty}"></td>
+        </tr>
+    </table>
+
+    <p th:if="${#lists.isEmpty(questions)}">This quiz has no questions yet.</p>
+</body>
+
+</html>
