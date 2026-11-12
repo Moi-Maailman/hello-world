@@ -52,8 +52,8 @@
             Add an answer option
         </a>
 
-        <a th:href="@{/quizlist}" class="btn btn-secondary">
-            Back to quizzes
+        <a th:href="@{/questionlist/{id}(id=${question.quiz.id})}" class="btn btn-secondary">
+            Back to questions
         </a>
 
     </div>

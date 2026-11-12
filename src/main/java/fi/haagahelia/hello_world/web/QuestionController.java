@@ -46,8 +46,10 @@ public class QuestionController {
     // U7.1: delete a question
     @PostMapping("/deletequestion/{id}")
     public String deleteQuestion(@PathVariable Long id) {
-        questionRepository.deleteById(id);
-        return "redirect:/quizlist";
+        Question question = questionRepository.findById(id).orElseThrow();
+        Long quizId = question.getQuiz().getId();
+        questionRepository.delete(question);
+        return "redirect:/questionlist/" + quizId;
     }
 
     // U6.3: show the questions of one quiz
