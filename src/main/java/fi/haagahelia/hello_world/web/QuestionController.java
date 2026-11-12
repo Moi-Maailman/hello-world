@@ -40,7 +40,7 @@ public class QuestionController {
         Quiz quiz = quizRepository.findById(quizId).orElseThrow();
         question.setQuiz(quiz);
         questionRepository.save(question);
-        return "redirect:/quizlist";
+        return "redirect:/questionlist/" + quizId;
     }
 
     // U7.1: delete a question
@@ -48,5 +48,14 @@ public class QuestionController {
     public String deleteQuestion(@PathVariable Long id) {
         questionRepository.deleteById(id);
         return "redirect:/quizlist";
+    }
+
+    // U6.3: show the questions of one quiz
+    @GetMapping("/questionlist/{quizId}")
+    public String showQuestionList(@PathVariable Long quizId, Model model) {
+        Quiz quiz = quizRepository.findById(quizId).orElseThrow();
+        model.addAttribute("quiz", quiz);
+        model.addAttribute("questions", questionRepository.findByQuizId(quizId));
+        return "questionlist";
     }
 }
