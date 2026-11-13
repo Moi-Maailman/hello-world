@@ -17,3 +17,67 @@ This project is developed by team **Hello World**.
 
 ## Deployment
 The application is deployed to Rahti: https://hello-world-quizzer-hello-world.2.rahtiapp.fi
+
+## Developer guide
+
+### Requirements
+
+- Java 17
+- Node.js
+- Git
+
+### Start the backend
+
+Open a terminal in the project folder.
+
+On Windows, run:
+
+.\mvnw.cmd spring-boot:run
+
+On macOS, Linux, or Git Bash, run:
+
+./mvnw spring-boot:run
+
+Open the teacher dashboard at http://localhost:8080.
+
+The published quizzes API is available at http://localhost:8080/api/quizzes.
+
+Press Ctrl+C to stop the backend.
+
+### Start the frontend
+
+Keep the backend running and open another terminal in the project folder.
+
+Run:
+
+cd frontend
+npm install
+npm run dev
+
+Open the student dashboard at http://localhost:5173.
+
+Press Ctrl+C to stop the frontend.
+
+### Run the tests
+
+Stop the backend before running the tests.
+
+On Windows:
+
+.\mvnw.cmd test
+
+On macOS, Linux, or Git Bash:
+
+./mvnw test
+
+### Build the applications
+
+Build the backend on Windows:
+
+.\mvnw.cmd clean package
+
+Build the frontend:
+
+cd frontend
+npm install
+npm run build
