@@ -28,9 +28,6 @@
                     <td th:text="${question.difficulty}"></td>
                     <td>
                         <div class="d-flex gap-2">
-                            <a th:href="@{/questions/{id}/answer-options(id=${question.id})}" class="btn btn-secondary">
-                                Answer options
-                            </a>
                             <form th:action="@{/deletequestion/{id}(id=${question.id})}" method="post">
                                 <button type="submit" class="btn btn-danger">Delete</button>
                             </form>
