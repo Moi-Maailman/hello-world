@@ -14,14 +14,17 @@
         <table class="table align-middle" th:unless="${#lists.isEmpty(questions)}">
             <thead>
                 <tr>
-                    <th>Question</th>
+                    <th>Question text</th>
                     <th>Difficulty</th>
                     <th>Actions</th>
                 </tr>
             </thead>
             <tbody>
                 <tr th:each="question : ${questions}">
-                    <td th:text="${question.text}"></td>
+                    <td>
+                        <a th:href="@{/questions/{id}/answer-options(id=${question.id})}"
+                            th:text="${question.text}"></a>
+                    </td>
                     <td th:text="${question.difficulty}"></td>
                     <td>
                         <div class="d-flex gap-2">

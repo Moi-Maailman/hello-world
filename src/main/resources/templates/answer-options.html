@@ -10,15 +10,13 @@
 <body>
     <div class="container-fluid p-3">
 
-        <h1 class="display-4 mb-4">Answer options</h1>
+        <h1 class="display-4 mb-4">Answer options of "<span th:text="${question.text}"></span>"</h1>
 
-        <p class="text-muted" th:text="${question.text}"></p>
-
-        <table class="table">
+        <table class="table align-middle">
             <thead>
                 <tr>
-                    <th>Answer option</th>
-                    <th>Correct</th>
+                    <th>Answer option text</th>
+                    <th>Correctness</th>
                     <th></th>
                 </tr>
             </thead>
@@ -28,12 +26,12 @@
                     <td th:text="${option.text}"></td>
 
                     <td>
-                        <span th:if="${option.correct}" class="badge bg-primary">
-                            Yes
+                        <span th:if="${option.correct}" class="badge bg-success">
+                            Correct
                         </span>
 
-                        <span th:unless="${option.correct}" class="badge bg-secondary">
-                            No
+                        <span th:unless="${option.correct}" class="badge bg-danger">
+                            Not correct
                         </span>
                     </td>
 
