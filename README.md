@@ -32,17 +32,21 @@ Open a terminal in the project folder.
 
 On Windows, run:
 
+```powershell
 .\mvnw.cmd spring-boot:run
+```
 
 On macOS, Linux, or Git Bash, run:
 
+```bash
 ./mvnw spring-boot:run
+```
 
 Open the teacher dashboard at http://localhost:8080.
 
 The published quizzes API is available at http://localhost:8080/api/quizzes.
 
-Press Ctrl+C to stop the backend.
+Press `Ctrl+C` to stop the backend.
 
 ### Start the frontend
 
@@ -50,13 +54,15 @@ Keep the backend running and open another terminal in the project folder.
 
 Run:
 
+```bash
 cd frontend
 npm install
 npm run dev
+```
 
 Open the student dashboard at http://localhost:5173.
 
-Press Ctrl+C to stop the frontend.
+Press `Ctrl+C` to stop the frontend.
 
 ### Run the tests
 
@@ -64,20 +70,28 @@ Stop the backend before running the tests.
 
 On Windows:
 
+```powershell
 .\mvnw.cmd test
+```
 
 On macOS, Linux, or Git Bash:
 
+```bash
 ./mvnw test
+```
 
 ### Build the applications
 
 Build the backend on Windows:
 
+```powershell
 .\mvnw.cmd clean package
+```
 
 Build the frontend:
 
+```bash
 cd frontend
 npm install
 npm run build
+```
