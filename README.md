@@ -97,6 +97,6 @@ npm run build
 ```
 
 ## Sprint 1 Restrosprective
-(FLinga) ([https://edu.flinga.fi/s/EQYG8HZ])
+Flinga: ([https://edu.flinga.fi/s/EQYG8HZ])
 
 
