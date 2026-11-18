@@ -95,3 +95,8 @@ cd frontend
 npm install
 npm run build
 ```
+
+## Sprint 1 Restrosprective
+(FLinga) ([https://edu.flinga.fi/s/EQYG8HZ])
+
+
