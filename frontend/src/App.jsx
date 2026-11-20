@@ -125,6 +125,12 @@ function App() {
               <p>
                 <strong>Course:</strong> {quiz.courseCode}
               </p>
+              <p>
+                <strong>Category:</strong> {quiz.category ? quiz.category.name : "-"}
+              </p>
+              <p>
+                <strong>Added on:</strong> {new Date(quiz.createdAt).toLocaleDateString("fi-FI")}
+              </p>
             </li>
           ))}
         </ul>
