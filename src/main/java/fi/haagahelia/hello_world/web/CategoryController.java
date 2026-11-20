@@ -18,6 +18,11 @@ public class CategoryController {
         this.categoryRepository = categoryRepository;
     }
 
+    @GetMapping("/addcategory")
+    public String showAddCategoryForm() {
+        return "addcategory";
+    }
+
     @PostMapping("/savecategory")
     public String saveCategory(@ModelAttribute Category category) {
         categoryRepository.save(category);
