@@ -57,6 +57,6 @@ public class CategoryController {
         }
 
         categoryRepository.delete(category);
-        return "redirect:/quizlist";
+        return "redirect:/categorylist";
     }
 }

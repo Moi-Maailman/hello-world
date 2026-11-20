@@ -15,11 +15,17 @@
             <thead>
                 <tr>
                     <th>Name</th>
+                    <th>Actions</th>
                 </tr>
             </thead>
             <tbody>
                 <tr th:each="category : ${categories}">
                     <td th:text="${category.name}"></td>
+                    <td>
+                        <form th:action="@{/deletecategory/{id}(id=${category.id})}" method="post">
+                            <button type="submit" class="btn btn-danger">Delete</button>
+                        </form>
+                    </td>
                 </tr>
             </tbody>
         </table>
