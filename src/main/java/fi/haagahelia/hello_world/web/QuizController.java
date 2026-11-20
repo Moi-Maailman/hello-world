@@ -63,6 +63,7 @@ public class QuizController {
         quiz.setDescription(formQuiz.getDescription());
         quiz.setCourseCode(formQuiz.getCourseCode());
         quiz.setPublished(formQuiz.isPublished());
+        quiz.setCategory(formQuiz.getCategory());
 
         quizRepository.save(quiz);
         return "redirect:/quizlist";
@@ -75,6 +76,7 @@ public class QuizController {
                         HttpStatus.NOT_FOUND, "Quiz not found"));
 
         model.addAttribute("quiz", quiz);
+        model.addAttribute("categories", categoryRepository.findAll());
         return "editquiz";
     }
 
