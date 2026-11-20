@@ -12,6 +12,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import jakarta.persistence.ManyToOne;
 
 @Entity
 public class Quiz {
@@ -25,6 +26,9 @@ public class Quiz {
     private String courseCode;
     private boolean published;
     private LocalDateTime createdAt = LocalDateTime.now();
+
+    @ManyToOne
+    private Category category;
 
     @JsonIgnore
     @OneToMany(mappedBy = "quiz", cascade = CascadeType.ALL, orphanRemoval = true)
@@ -41,6 +45,14 @@ public class Quiz {
         this.courseCode = courseCode;
         this.published = published;
         this.createdAt = LocalDateTime.now();
+    }
+
+    public Category getCategory() {
+        return category;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
     }
 
     public void setId(Long id) {

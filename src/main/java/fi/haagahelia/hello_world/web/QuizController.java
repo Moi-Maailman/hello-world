@@ -14,21 +14,28 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.server.ResponseStatusException;
 import org.springframework.http.HttpStatus;
 
+import fi.haagahelia.hello_world.domain.CategoryRepository;
 import fi.haagahelia.hello_world.domain.QuizRepository;
 
 @Controller
 public class QuizController {
 
+    private final QuizRepository quizRepository;
+    private final CategoryRepository categoryRepository;
+
+    public QuizController(
+            QuizRepository quizRepository,
+            CategoryRepository categoryRepository) {
+
+        this.quizRepository = quizRepository;
+        this.categoryRepository = categoryRepository;
+    }
+
     @GetMapping("/addquiz")
     public String showAddQuizForm(Model model) {
         model.addAttribute("quiz", new Quiz());
+        model.addAttribute("categories", categoryRepository.findAll());
         return "addquiz";
-    }
-
-    private final QuizRepository quizRepository;
-
-    public QuizController(QuizRepository quizRepository) {
-        this.quizRepository = quizRepository;
     }
 
     @PostMapping("/savequiz")
