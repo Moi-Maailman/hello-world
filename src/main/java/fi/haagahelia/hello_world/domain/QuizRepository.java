@@ -9,4 +9,6 @@ public interface QuizRepository extends CrudRepository<Quiz, Long> {
     List<Quiz> findByPublishedTrue();
 
     List<Quiz> findByCategory(Category category);
+
+    List<Quiz> findByCategoryAndPublishedTrue(Category category);
 }
