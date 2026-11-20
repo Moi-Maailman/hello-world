@@ -11,14 +11,18 @@ import org.springframework.web.server.ResponseStatusException;
 
 import fi.haagahelia.hello_world.domain.Category;
 import fi.haagahelia.hello_world.domain.CategoryRepository;
+import fi.haagahelia.hello_world.domain.Quiz;
+import fi.haagahelia.hello_world.domain.QuizRepository;
 
 @Controller
 public class CategoryController {
 
     private final CategoryRepository categoryRepository;
+    private final QuizRepository quizRepository;
 
-    public CategoryController(CategoryRepository categoryRepository) {
+    public CategoryController(CategoryRepository categoryRepository, QuizRepository quizRepository) {
         this.categoryRepository = categoryRepository;
+        this.quizRepository = quizRepository;
     }
 
     @GetMapping("/addcategory")
@@ -45,6 +49,13 @@ public class CategoryController {
         Category category = categoryRepository.findById(id)
                 .orElseThrow(() -> new ResponseStatusException(
                         HttpStatus.NOT_FOUND, "Category not found"));
+
+        // U4.2: remove the category from its quizzes first
+        for (Quiz quiz : quizRepository.findByCategory(category)) {
+            quiz.setCategory(null);
+            quizRepository.save(quiz);
+        }
+
         categoryRepository.delete(category);
         return "redirect:/quizlist";
     }
