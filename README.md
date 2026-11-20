@@ -6,7 +6,7 @@ This project is developed by team **Hello World**.
 
 ## Team members
 
-- Mai Vu ([maivu07](https://github.com/phuongmai19067-web))
+- Mai Vu ([maivu07](https://github.com/maivu07))
 - Mai Phuong Luu ([@phuongmaix2](https://github.com/phuongmaix2))
 - Thy Nguyen ([nnat-bot](https://github.com/nnat-bot))
 - Minh Doan ([ngocminh1110](https://github.com/ngocminh1110))
