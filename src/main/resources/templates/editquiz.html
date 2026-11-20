@@ -7,14 +7,6 @@
 </head>
 
 <body>
-    <div class="mb-3">
-        <label class="form-label">Category</label>
-        <select th:field="*{category}" class="form-select" required>
-            <option value="">Select a category</option>
-            <option th:each="category : ${categories}" th:value="${category.id}" th:text="${category.name}">
-            </option>
-        </select>
-    </div>
     <div class="container-fluid p-3">
 
         <h1 class="display-4 mb-4" th:text="|Edit &quot;${quiz.name}&quot;|">
@@ -38,6 +30,15 @@
             <div class="mb-3">
                 <label class="form-label">Course code</label>
                 <input type="text" th:field="*{courseCode}" class="form-control" />
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Category</label>
+                <select th:field="*{category}" class="form-select" required>
+                    <option value="">Select a category</option>
+                    <option th:each="category : ${categories}" th:value="${category.id}" th:text="${category.name}">
+                    </option>
+                </select>
             </div>
 
             <div class="form-check mb-3">
