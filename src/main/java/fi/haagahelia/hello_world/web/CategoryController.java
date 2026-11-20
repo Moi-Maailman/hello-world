@@ -33,7 +33,7 @@ public class CategoryController {
     @PostMapping("/savecategory")
     public String saveCategory(@ModelAttribute Category category) {
         categoryRepository.save(category);
-        return "redirect:/quizlist";
+        return "redirect:/categorylist";
     }
 
     // U2.1: show the category list

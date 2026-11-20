@@ -33,6 +33,8 @@
         <p th:if="${#lists.isEmpty(categories)}" class="text-muted">No categories have been added yet.</p>
 
         <div class="d-flex gap-2">
+            <a th:href="@{/addcategory}" class="btn btn-primary">Add a category</a>
+            <a th:href="@{/quizlist}" class="btn btn-secondary">Back to quizzes</a>
         </div>
     </div>
 </body>
