@@ -5,6 +5,8 @@ function App() {
   const [quizzes, setQuizzes] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
+  const [categories, setCategories] = useState([]);
+  const [categoryError, setCategoryError] = useState("");
 
   useEffect(() => {
     fetch("http://localhost:8080/api/quizzes")
@@ -23,6 +25,23 @@ function App() {
       })
       .finally(() => {
         setLoading(false);
+      });
+  }, []);
+
+  useEffect(() => {
+    fetch("http://localhost:8080/api/categories")
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error(`Request failed with status ${response.status}`);
+        }
+
+        return response.json();
+      })
+      .then((data) => {
+        setCategories(data);
+      })
+      .catch((requestError) => {
+        setCategoryError(requestError.message);
       });
   }, []);
 
@@ -46,6 +65,24 @@ function App() {
   return (
     <main>
       <h1>Available quizzes</h1>
+
+      <section>
+        <h2>Categories</h2>
+
+        {categoryError ? (
+          <p className="error">
+            Could not load categories: {categoryError}
+          </p>
+        ) : categories.length === 0 ? (
+          <p>No categories are currently available.</p>
+        ) : (
+          <ul>
+            {categories.map((category) => (
+              <li key={category.id}>{category.name}</li>
+            ))}
+          </ul>
+        )}
+      </section>
 
       {quizzes.length === 0 ? (
         <p>No published quizzes are currently available.</p>
