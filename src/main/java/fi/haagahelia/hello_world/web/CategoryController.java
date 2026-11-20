@@ -28,4 +28,11 @@ public class CategoryController {
         categoryRepository.save(category);
         return "redirect:/quizlist";
     }
+
+    // U2.1: show the category list
+    @GetMapping("/categorylist")
+    public String showCategoryList(Model model) {
+        model.addAttribute("categories", categoryRepository.findAll());
+        return "categorylist";
+    }
 }
