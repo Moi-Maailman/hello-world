@@ -27,6 +27,7 @@
         <p th:if="${#lists.isEmpty(categories)}" class="text-muted">No categories have been added yet.</p>
 
         <div class="d-flex gap-2">
+            <a th:href="@{/addcategory}" class="btn btn-primary">Add a category</a>
         </div>
     </div>
 </body>
