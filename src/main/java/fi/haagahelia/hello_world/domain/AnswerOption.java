@@ -7,6 +7,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 @Entity
 public class AnswerOption {
@@ -19,6 +20,7 @@ public class AnswerOption {
 
     private boolean correct;
 
+    @JsonBackReference
     @ManyToOne
     @JoinColumn(name = "question_id", nullable = false)
     private Question question;
