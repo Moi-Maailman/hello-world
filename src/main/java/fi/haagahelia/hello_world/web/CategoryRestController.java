@@ -9,6 +9,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.tags.Tag;
 
 import fi.haagahelia.hello_world.domain.Category;
 import fi.haagahelia.hello_world.domain.CategoryRepository;
@@ -18,6 +22,7 @@ import fi.haagahelia.hello_world.domain.QuizRepository;
 @RestController
 @RequestMapping("/api")
 @CrossOrigin(origins = "*")
+@Tag(name = "Categories", description = "Operations for categories")
 public class CategoryRestController {
 
     private final CategoryRepository categoryRepository;
@@ -34,6 +39,11 @@ public class CategoryRestController {
     }
 
     // U10.2: get the published quizzes of a category
+    @Operation(summary = "Get the published quizzes of a category")
+    @ApiResponses({
+            @ApiResponse(responseCode = "200", description = "Published quizzes of the category"),
+            @ApiResponse(responseCode = "404", description = "Category with the provided id does not exist")
+    })
     @GetMapping("/categories/{id}/quizzes")
     public List<Quiz> getCategoryQuizzes(@PathVariable Long id) {
         Category category = categoryRepository.findById(id)
