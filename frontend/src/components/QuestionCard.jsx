@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-const API_URL = "http://localhost:8080/api";
+const API_URL = `${import.meta.env.VITE_BACKEND_URL}/api`;
 
 function QuestionCard({ question, number, total, onAnswered }) {
   const [selectedOptionId, setSelectedOptionId] = useState(null);
