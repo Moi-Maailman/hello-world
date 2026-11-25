@@ -1,5 +1,6 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useParams } from "react-router";
+import QuestionCard from "../components/QuestionCard";
 
 const API_URL = `${import.meta.env.VITE_BACKEND_URL}/api`;
 
@@ -9,6 +10,8 @@ function QuizPage() {
   const [questions, setQuestions] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
+  const [feedback, setFeedback] = useState(null);
+  const feedbackTimer = useRef(null);
 
   useEffect(() => {
     const fetchJson = (url) =>
@@ -34,6 +37,18 @@ function QuizPage() {
         setLoading(false);
       });
   }, [id]);
+
+  const showFeedback = (correct, errorMessage) => {
+    if (errorMessage) {
+      setFeedback({ type: "error", message: `Could not submit the answer: ${errorMessage}` });
+    } else if (correct) {
+      setFeedback({ type: "correct", message: "That is correct, good job! 🎉" });
+    } else {
+      setFeedback({ type: "wrong", message: "That is not correct, try again ❌" });
+    }
+    clearTimeout(feedbackTimer.current);
+    feedbackTimer.current = setTimeout(() => setFeedback(null), 3000);
+  };
 
   if (loading) {
     return (
@@ -67,25 +82,24 @@ function QuizPage() {
       ) : (
         <ul className="question-list">
           {questions.map((question, index) => (
-            <li key={question.id} className="question-card">
-              <h2>{question.text}</h2>
-              <p className="question-details">
-                Question {index + 1} of {questions.length}
-                {" - "}Difficulty: {formatDifficulty(question.difficulty)}
-              </p>
-            </li>
+            <QuestionCard
+              key={question.id}
+              question={question}
+              number={index + 1}
+              total={questions.length}
+              onAnswered={showFeedback}
+            />
           ))}
         </ul>
       )}
+
+      {feedback && (
+        <div className={`feedback ${feedback.type}`} role="status">
+          {feedback.message}
+        </div>
+      )}
     </main>
   );
-}
-
-function formatDifficulty(difficulty) {
-  if (!difficulty) {
-    return "-";
-  }
-  return difficulty.charAt(0) + difficulty.slice(1).toLowerCase();
 }
 
 export default QuizPage;

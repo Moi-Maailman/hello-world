@@ -8,6 +8,11 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import java.util.ArrayList;
+import java.util.List;
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.OneToMany;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class AnswerOption {
@@ -24,6 +29,10 @@ public class AnswerOption {
     @ManyToOne
     @JoinColumn(name = "question_id", nullable = false)
     private Question question;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "answerOption", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Answer> answers = new ArrayList<>();
 
     public AnswerOption() {
     }
