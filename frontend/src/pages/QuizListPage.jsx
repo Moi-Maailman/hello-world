@@ -7,7 +7,6 @@ function QuizListPage() {
   const [error, setError] = useState("");
   const [categories, setCategories] = useState([]);
   const [categoryError, setCategoryError] = useState("");
-  const [selectedCategoryId, setSelectedCategoryId] = useState(null);
 
   useEffect(() => {
     fetch("http://localhost:8080/api/quizzes")
@@ -46,13 +45,6 @@ function QuizListPage() {
       });
   }, []);
 
-  const filteredQuizzes =
-    selectedCategoryId === null
-      ? quizzes
-      : quizzes.filter(
-        (quiz) => quiz.category?.id === selectedCategoryId
-      );
-
   if (loading) {
     return (
       <main>
@@ -85,40 +77,25 @@ function QuizListPage() {
           <p>No categories are currently available.</p>
         ) : (
           <ul className="category-list">
-            <li>
-              <button
-                type="button"
-                className={`category-button ${selectedCategoryId === null ? "active" : ""
-                  }`}
-                aria-pressed={selectedCategoryId === null}
-                onClick={() => setSelectedCategoryId(null)}
-              >
-                All categories
-              </button>
-            </li>
-
             {categories.map((category) => (
               <li key={category.id}>
-                <button
-                  type="button"
-                  className={`category-button ${selectedCategoryId === category.id ? "active" : ""
-                    }`}
-                  aria-pressed={selectedCategoryId === category.id}
-                  onClick={() => setSelectedCategoryId(category.id)}
+                <Link
+                  to={`/categories/${category.id}/quizzes`}
+                  className="category-button"
                 >
                   {category.name}
-                </button>
+                </Link>
               </li>
             ))}
           </ul>
         )}
       </section>
 
-      {filteredQuizzes.length === 0 ? (
+      {quizzes.length === 0 ? (
         <p>No published quizzes are currently available.</p>
       ) : (
         <ul className="quiz-list">
-          {filteredQuizzes.map((quiz) => (
+          {quizzes.map((quiz) => (
             <li key={quiz.id} className="quiz-card">
               <h2><Link to={`/quizzes/${quiz.id}`}>{quiz.name}</Link></h2>
               <p>{quiz.description}</p>
