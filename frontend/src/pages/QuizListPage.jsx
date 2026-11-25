@@ -9,7 +9,7 @@ function QuizListPage() {
   const [categoryError, setCategoryError] = useState("");
 
   useEffect(() => {
-    fetch("http://localhost:8080/api/quizzes")
+    fetch(`${import.meta.env.VITE_BACKEND_URL}/api/quizzes`)
       .then((response) => {
         if (!response.ok) {
           throw new Error(`Request failed with status ${response.status}`);
@@ -29,7 +29,7 @@ function QuizListPage() {
   }, []);
 
   useEffect(() => {
-    fetch("http://localhost:8080/api/categories")
+    fetch(`${import.meta.env.VITE_BACKEND_URL}/api/categories`)
       .then((response) => {
         if (!response.ok) {
           throw new Error(`Request failed with status ${response.status}`);

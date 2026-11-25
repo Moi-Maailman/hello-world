@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router";
 
-const API_URL = "http://localhost:8080/api";
+const API_URL = `${import.meta.env.VITE_BACKEND_URL}/api`;
 
 function CategoryQuizzesPage() {
     const { id } = useParams();

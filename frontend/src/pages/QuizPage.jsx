@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { useParams } from "react-router";
 import QuestionCard from "../components/QuestionCard";
 
-const API_URL = "http://localhost:8080/api";
+const API_URL = `${import.meta.env.VITE_BACKEND_URL}/api`;
 
 function QuizPage() {
   const { id } = useParams();

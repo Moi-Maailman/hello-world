@@ -18,6 +18,44 @@ This project is developed by team **Hello World**.
 ## Deployment
 The application is deployed to Rahti: https://hello-world-quizzer-hello-world.2.rahtiapp.fi
 
+## Data model
+
+The application's data model consists of the following entities:
+
+- `Category`: represents a category used to group quizzes.
+- `Quiz`: represents a quiz belonging to a category. A quiz can have many questions.
+- `Question`: represents a question belonging to a quiz. A question can have many answer options.
+- `AnswerOption`: represents a possible answer to a question.
+
+```mermaid
+erDiagram
+    Category {
+        Long id PK
+        String name
+    }
+    Quiz {
+        Long id PK
+        String name
+        String description
+        String courseCode
+        boolean published
+        LocalDateTime createdAt
+    }
+    Question {
+        Long id PK
+        String text
+        Difficulty difficulty
+    }
+    AnswerOption {
+        Long id PK
+        String text
+        boolean correct
+    }
+    Category 1--0+ Quiz : "categorizes"
+    Quiz 1--0+ Question : "contains"
+    Question 1--0+ AnswerOption : "has"
+```
+
 ## Developer guide
 
 ### Requirements
