@@ -24,9 +24,14 @@
                     <td th:text="${category.name}"></td>
                     <td th:text="${category.description != null ? category.description : '-'}"></td>
                     <td>
-                        <form th:action="@{/deletecategory/{id}(id=${category.id})}" method="post">
-                            <button type="submit" class="btn btn-danger">Delete</button>
-                        </form>
+                        <div class="d-flex gap-2">
+                            <a th:href="@{/editcategory/{id}(id=${category.id})}"
+                                class="btn btn-secondary">Edit</a>
+
+                            <form th:action="@{/deletecategory/{id}(id=${category.id})}" method="post">
+                                <button type="submit" class="btn btn-danger">Delete</button>
+                            </form>
+                        </div>
                     </td>
                 </tr>
             </tbody>

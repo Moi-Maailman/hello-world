@@ -43,6 +43,30 @@ public class CategoryController {
         return "categorylist";
     }
 
+    @GetMapping("/editcategory/{id}")
+    public String showEditCategoryForm(@PathVariable Long id, Model model) {
+        Category category = categoryRepository.findById(id)
+                .orElseThrow(() -> new ResponseStatusException(
+                        HttpStatus.NOT_FOUND, "Category with id " + id + " does not exist"));
+
+        model.addAttribute("category", category);
+        return "editcategory";
+    }
+
+    @PostMapping("/updatecategory")
+    public String updateCategory(@ModelAttribute Category formCategory) {
+        Category category = categoryRepository.findById(formCategory.getId())
+                .orElseThrow(() -> new ResponseStatusException(
+                        HttpStatus.NOT_FOUND,
+                        "Category with id " + formCategory.getId() + " does not exist"));
+
+        category.setName(formCategory.getName());
+        category.setDescription(formCategory.getDescription());
+        categoryRepository.save(category);
+
+        return "redirect:/categorylist";
+    }
+
     // U4.1: delete a category
     @PostMapping("/deletecategory/{id}")
     public String deleteCategory(@PathVariable Long id) {
