@@ -25,10 +25,11 @@ The application is deployed to production:
 
 The application's data model consists of the following entities:
 
-- `Category`: represents a category used to group quizzes.
-- `Quiz`: represents a quiz belonging to a category. A quiz can have many questions.
-- `Question`: represents a question belonging to a quiz. A question can have many answer options.
-- `AnswerOption`: represents a possible answer to a question.
+- `Category`: represents a category used to group quizzes. A category can have many quizzes.
+- `Quiz`: represents a quiz with a name, description, course code, publication status, and creation timestamp. A quiz can belong to one category and can have many questions.
+- `Question`: represents a question belonging to a quiz. It contains the question text and difficulty level. A question can have many answer options.
+- `AnswerOption`: represents a possible answer to a question and indicates whether the option is correct. An answer option can be selected in many submitted answers.
+- `Answer`: represents an answer submitted by a student. It stores the selected answer option and the submission timestamp.
 
 ```mermaid
 erDiagram
@@ -54,9 +55,14 @@ erDiagram
         String text
         boolean correct
     }
+    Answer {
+        Long id PK
+        LocalDateTime createdAt
+    }
     Category 1--0+ Quiz : "categorizes"
     Quiz 1--0+ Question : "contains"
     Question 1--0+ AnswerOption : "has"
+    AnswerOption 1--0+ Answer : "selected in"
 ```
 
 ## Developer guide
