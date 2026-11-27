@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
+
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
@@ -22,7 +23,7 @@ import fi.haagahelia.hello_world.domain.QuizRepository;
 @RestController
 @RequestMapping("/api")
 @CrossOrigin(origins = "*")
-@Tag(name = "Categories", description = "Operations for categories")
+@Tag(name = "Categories", description = "Operations for retrieving categories and their quizzes")
 public class CategoryRestController {
 
     private final CategoryRepository categoryRepository;
@@ -33,10 +34,20 @@ public class CategoryRestController {
         this.quizRepository = quizRepository;
     }
 
+    @Operation(summary = "Get all categories", description = "Returns all categories that the teacher has added")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Categories retrieved successfully")
+    })
     @GetMapping("/categories")
     public Iterable<Category> getCategories() {
         return categoryRepository.findAll();
     }
+
+    @Operation(summary = "Get a category by id", description = "Returns the category with the provided id")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Category with the provided id retrieved successfully"),
+            @ApiResponse(responseCode = "404", description = "Category with the provided id does not exist")
+    })
     @GetMapping("/categories/{id}")
     public Category getCategoryById(@PathVariable Long id) {
         return categoryRepository.findById(id)
@@ -44,10 +55,9 @@ public class CategoryRestController {
                         HttpStatus.NOT_FOUND, "Category with id " + id + " does not exist"));
     }
 
-    // U10.2: get the published quizzes of a category
-    @Operation(summary = "Get the published quizzes of a category")
-    @ApiResponses({
-            @ApiResponse(responseCode = "200", description = "Published quizzes of the category"),
+    @Operation(summary = "Get the published quizzes of a category", description = "Returns the published quizzes that belong to the category with the provided id")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Published quizzes of the category retrieved successfully"),
             @ApiResponse(responseCode = "404", description = "Category with the provided id does not exist")
     })
     @GetMapping("/categories/{id}/quizzes")

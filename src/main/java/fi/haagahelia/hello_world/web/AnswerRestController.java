@@ -9,6 +9,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.tags.Tag;
+
 import fi.haagahelia.hello_world.domain.Answer;
 import fi.haagahelia.hello_world.domain.AnswerOption;
 import fi.haagahelia.hello_world.domain.AnswerOptionRepository;
@@ -19,6 +24,7 @@ import fi.haagahelia.hello_world.dto.AnswerRequestDTO;
 @RestController
 @RequestMapping("/api")
 @CrossOrigin(origins = "*")
+@Tag(name = "Answers", description = "Operations for submitting answers to quiz questions")
 public class AnswerRestController {
 
     private final AnswerRepository answerRepository;
@@ -31,6 +37,12 @@ public class AnswerRestController {
     }
 
     // Exercise 12: submit an answer for a question
+    @Operation(summary = "Submit an answer", description = "Saves the student's answer to a question. The request body contains the id of the selected answer option. The answer option must belong to a published quiz.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "201", description = "Answer saved successfully"),
+            @ApiResponse(responseCode = "400", description = "Answer option id is missing or the quiz is not published"),
+            @ApiResponse(responseCode = "404", description = "Answer option with the provided id does not exist")
+    })
     @PostMapping("/answers")
     public ResponseEntity<Answer> createAnswer(@RequestBody AnswerRequestDTO request) {
         if (request == null || request.answerOptionId() == null) {
