@@ -13,12 +13,18 @@ public class Category {
     private Long id;
 
     private String name;
+    private String description;
 
     public Category() {
     }
 
     public Category(String name) {
         this.name = name;
+    }
+
+    public Category(String name, String description) {
+        this.name = name;
+        this.description = description;
     }
 
     public Long getId() {
@@ -29,11 +35,19 @@ public class Category {
         return name;
     }
 
+    public String getDescription() {
+        return description;
+    }
+
     public void setId(Long id) {
         this.id = id;
     }
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 }
