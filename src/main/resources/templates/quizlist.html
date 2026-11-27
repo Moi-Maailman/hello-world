@@ -10,6 +10,7 @@
     <div class="container-fluid p-3">
         <h1 class="display-4 mb-4">Quizzes</h1>
 
+        <div class="table-responsive">
         <table class="table align-middle">
             <thead>
                 <tr>
@@ -19,7 +20,7 @@
                     <th>Category</th>
                     <th>Published</th>
                     <th>Added on</th>
-                    <th>Actions</th>
+                    <th class="text-nowrap">Actions</th>
                 </tr>
             </thead>
 
@@ -44,19 +45,19 @@
 
                     <td th:text="${#temporals.format(quiz.createdAt, 'dd.MM.yyyy')}"></td>
 
-                    <td>
-                        <div class="d-flex gap-2">
-                            <a th:href="@{/editquiz/{id}(id=${quiz.id})}" class="btn btn-secondary">
+                    <td class="text-nowrap">
+                        <div class="d-flex flex-nowrap gap-2">
+                            <a th:href="@{/editquiz/{id}(id=${quiz.id})}" class="btn btn-sm btn-outline-secondary">
                                 Edit
                             </a>
 
                             <form th:action="@{/deletequiz/{id}(id=${quiz.id})}" method="post">
-                                <button type="submit" class="btn btn-danger">
+                                <button type="submit" class="btn btn-sm btn-outline-danger">
                                     Delete
                                 </button>
                             </form>
 
-                            <a th:href="@{/addquestion/{id}(id=${quiz.id})}" class="btn btn-primary">
+                            <a th:href="@{/addquestion/{id}(id=${quiz.id})}" class="btn btn-sm btn-primary text-nowrap">
                                 Add question
                             </a>
 
@@ -65,6 +66,7 @@
                 </tr>
             </tbody>
         </table>
+        </div>
 
         <div class="d-flex gap-2">
             <a th:href="@{/addquiz}" class="btn btn-primary">Add a quiz</a>
