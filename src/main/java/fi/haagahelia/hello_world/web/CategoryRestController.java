@@ -37,6 +37,12 @@ public class CategoryRestController {
     public Iterable<Category> getCategories() {
         return categoryRepository.findAll();
     }
+    @GetMapping("/categories/{id}")
+    public Category getCategoryById(@PathVariable Long id) {
+        return categoryRepository.findById(id)
+                .orElseThrow(() -> new ResponseStatusException(
+                        HttpStatus.NOT_FOUND, "Category with id " + id + " does not exist"));
+    }
 
     // U10.2: get the published quizzes of a category
     @Operation(summary = "Get the published quizzes of a category")
