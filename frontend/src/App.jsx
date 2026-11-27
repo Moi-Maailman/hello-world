@@ -2,6 +2,7 @@ import { BrowserRouter, Link, Route, Routes } from "react-router";
 import QuizListPage from "./pages/QuizListPage";
 import QuizPage from "./pages/QuizPage";
 import CategoryQuizzesPage from "./pages/CategoryQuizzesPage";
+import QuizResultsPage from "./pages/QuizResultsPage";
 import "./App.css";
 
 function App() {
@@ -19,6 +20,7 @@ function App() {
       <Routes>
         <Route path="/" element={<QuizListPage />} />
         <Route path="/quizzes/:id" element={<QuizPage />} />
+        <Route path="/quizzes/:id/results" element={<QuizResultsPage />} />
         <Route path="/categories/:id/quizzes" element={<CategoryQuizzesPage />} />
       </Routes>
     </BrowserRouter>
