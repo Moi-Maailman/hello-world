@@ -23,7 +23,7 @@ The application is deployed to production:
 
 ## REST API
 
-The REST API documentation is available at https://hello-world-quizzer-hello-world.2 rahtiapp.fi/swagger-ui/index.html
+The REST API documentation is available at https://hello-world-quizzer-hello-world.2.rahtiapp.fi/swagger-ui/index.html
 
 ## Data model
 
@@ -72,10 +72,9 @@ erDiagram
 
 ## Developer guide
 
-- Backend: Java 17, Spring Boot, Spring MVC, Spring Data JPA, Hibernate, Thymeleaf and Springdoc OpenAPI.
-- Databases: H2 for development and PostgreSQL for production.
-- Frontend: JavaScript, React 19, React Router 7 and Vite 8.
-- Communication: the frontend communicates with the backend through its REST API.
+- Database: stores categories, quizzes, questions, answer options and submitted answers. H2 is used for development and PostgreSQL for production.
+- Backend: uses Java 17, Spring Boot, Spring MVC, Spring Data JPA, Hibernate, Thymeleaf and Springdoc OpenAPI. It manages data, provides the teacher dashboard and exposes the REST API.
+- Frontend: uses JavaScript, React 19, React Router 7 and Vite 8. It provides the student dashboard and communicates with the backend through the REST API.
 
 ### Requirements
 
@@ -108,6 +107,12 @@ Press `Ctrl+C` to stop the backend.
 ### Start the frontend
 
 Keep the backend running and open another terminal in the project folder.
+
+Create a `.env.local` file inside the `frontend` folder:
+
+```properties
+VITE_BACKEND_URL=http://localhost:8080
+```
 
 Run:
 
@@ -153,7 +158,8 @@ npm install
 npm run build
 ```
 
-## Sprint 1 Restrosprective
-Flinga: https://edu.flinga.fi/s/EQYG8HZ
+## Retrospectives
+
+[Sprint 1 Retrospective](https://edu.flinga.fi/s/EQYG8HZ)
 
 
