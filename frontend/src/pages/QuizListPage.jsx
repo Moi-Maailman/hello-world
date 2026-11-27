@@ -5,8 +5,6 @@ function QuizListPage() {
   const [quizzes, setQuizzes] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
-  const [categories, setCategories] = useState([]);
-  const [categoryError, setCategoryError] = useState("");
 
   useEffect(() => {
     fetch(`${import.meta.env.VITE_BACKEND_URL}/api/quizzes`)
@@ -25,23 +23,6 @@ function QuizListPage() {
       })
       .finally(() => {
         setLoading(false);
-      });
-  }, []);
-
-  useEffect(() => {
-    fetch(`${import.meta.env.VITE_BACKEND_URL}/api/categories`)
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error(`Request failed with status ${response.status}`);
-        }
-
-        return response.json();
-      })
-      .then((data) => {
-        setCategories(data);
-      })
-      .catch((requestError) => {
-        setCategoryError(requestError.message);
       });
   }, []);
 
@@ -65,31 +46,6 @@ function QuizListPage() {
   return (
     <main>
       <h1>Available quizzes</h1>
-
-      <section>
-        <h2>Categories</h2>
-
-        {categoryError ? (
-          <p className="error">
-            Could not load categories: {categoryError}
-          </p>
-        ) : categories.length === 0 ? (
-          <p>No categories are currently available.</p>
-        ) : (
-          <ul className="category-list">
-            {categories.map((category) => (
-              <li key={category.id}>
-                <Link
-                  to={`/categories/${category.id}/quizzes`}
-                  className="category-button"
-                >
-                  {category.name}
-                </Link>
-              </li>
-            ))}
-          </ul>
-        )}
-      </section>
 
       {quizzes.length === 0 ? (
         <p>No published quizzes are currently available.</p>

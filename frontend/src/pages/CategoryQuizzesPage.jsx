@@ -20,11 +20,11 @@ function CategoryQuizzesPage() {
             });
 
         Promise.all([
-            fetchJson(`${API_URL}/categories`),
+            fetchJson(`${API_URL}/categories/${id}`),
             fetchJson(`${API_URL}/categories/${id}/quizzes`),
         ])
             .then(([categoryData, quizData]) => {
-                setCategory(categoryData.find((c) => c.id === Number(id)));
+                setCategory(categoryData);
                 setQuizzes(quizData);
             })
             .catch((requestError) => {
