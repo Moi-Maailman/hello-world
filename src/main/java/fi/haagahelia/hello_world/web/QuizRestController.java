@@ -12,10 +12,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
+import fi.haagahelia.hello_world.domain.Answer;
+import fi.haagahelia.hello_world.domain.AnswerRepository;
 import fi.haagahelia.hello_world.domain.Question;
 import fi.haagahelia.hello_world.domain.QuestionRepository;
 import fi.haagahelia.hello_world.domain.Quiz;
 import fi.haagahelia.hello_world.domain.QuizRepository;
+import fi.haagahelia.hello_world.dto.QuestionResultDTO;
 
 @RestController
 @RequestMapping("/api")
@@ -24,10 +27,13 @@ public class QuizRestController {
 
     private final QuizRepository quizRepository;
     private final QuestionRepository questionRepository;
+    private final AnswerRepository answerRepository; // U8.3
 
-    public QuizRestController(QuizRepository quizRepository, QuestionRepository questionRepository) {
+    public QuizRestController(QuizRepository quizRepository, QuestionRepository questionRepository,
+            AnswerRepository answerRepository) {
         this.quizRepository = quizRepository;
         this.questionRepository = questionRepository;
+        this.answerRepository = answerRepository; // U8.3
     }
 
     @GetMapping("/quizzes")
@@ -52,5 +58,27 @@ public class QuizRestController {
         questions.sort(Comparator.comparing(Question::getDifficulty,
                 Comparator.nullsLast(Comparator.naturalOrder())));
         return questions;
+    }
+
+    // U8.3: get the results of a quiz
+    @GetMapping("/quizzes/{id}/results")
+    public List<QuestionResultDTO> getQuizResults(@PathVariable Long id) {
+        getQuizById(id);
+
+        List<QuestionResultDTO> results = new ArrayList<>();
+        for (Question question : questionRepository.findByQuizId(id)) {
+            List<Answer> answers = answerRepository.findByAnswerOptionQuestionId(question.getId());
+            long correct = answers.stream()
+                    .filter(answer -> answer.getAnswerOption().isCorrect())
+                    .count();
+            results.add(new QuestionResultDTO(
+                    question.getId(),
+                    question.getText(),
+                    question.getDifficulty(),
+                    answers.size(),
+                    correct,
+                    answers.size() - correct));
+        }
+        return results;
     }
 }
