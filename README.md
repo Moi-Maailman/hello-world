@@ -21,6 +21,10 @@ The application is deployed to production:
 - Student dashboard (frontend): https://quizzer-hello-world.onrender.com
 - Teacher dashboard (backend): https://hello-world-quizzer-hello-world.2.rahtiapp.fi
 
+## REST API
+
+The REST API documentation is available at https://hello-world-quizzer-hello-world.2 rahtiapp.fi/swagger-ui/index.html
+
 ## Data model
 
 The application's data model consists of the following entities:
