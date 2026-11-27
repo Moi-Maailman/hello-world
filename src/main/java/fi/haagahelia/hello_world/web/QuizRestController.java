@@ -11,6 +11,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.tags.Tag;
 
 import fi.haagahelia.hello_world.domain.Answer;
 import fi.haagahelia.hello_world.domain.AnswerRepository;
@@ -23,6 +27,7 @@ import fi.haagahelia.hello_world.dto.QuestionResultDTO;
 @RestController
 @RequestMapping("/api")
 @CrossOrigin(origins = "*")
+@Tag(name = "Quizzes", description = "Operations for quizzes")
 public class QuizRestController {
 
     private final QuizRepository quizRepository;
@@ -61,6 +66,11 @@ public class QuizRestController {
     }
 
     // U8.3: get the results of a quiz
+    @Operation(summary = "Get the results of a quiz", description = "Returns the total, correct and wrong answers for each question of the quiz")
+    @ApiResponses({
+            @ApiResponse(responseCode = "200", description = "Results of the quiz's questions"),
+            @ApiResponse(responseCode = "404", description = "Quiz with the provided id does not exist")
+    })
     @GetMapping("/quizzes/{id}/results")
     public List<QuestionResultDTO> getQuizResults(@PathVariable Long id) {
         getQuizById(id);
