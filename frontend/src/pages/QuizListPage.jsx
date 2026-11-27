@@ -108,6 +108,7 @@ function QuizListPage() {
               <p>
                 <strong>Added on:</strong> {new Date(quiz.createdAt).toLocaleDateString("fi-FI")}
               </p>
+              <Link to={`/quizzes/${quiz.id}/results`}>See results</Link>
             </li>
           ))}
         </ul>

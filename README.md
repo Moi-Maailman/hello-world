@@ -36,6 +36,7 @@ erDiagram
     Category {
         Long id PK
         String name
+        String description
     }
     Quiz {
         Long id PK
