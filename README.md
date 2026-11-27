@@ -68,6 +68,11 @@ erDiagram
 
 ## Developer guide
 
+- Backend: Java 17, Spring Boot, Spring MVC, Spring Data JPA, Hibernate, Thymeleaf and Springdoc OpenAPI.
+- Databases: H2 for development and PostgreSQL for production.
+- Frontend: JavaScript, React 19, React Router 7 and Vite 8.
+- Communication: the frontend communicates with the backend through its REST API.
+
 ### Requirements
 
 - Java 17
